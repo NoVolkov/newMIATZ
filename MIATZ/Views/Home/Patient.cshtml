@@ -17,7 +17,7 @@
     @Model.DateOfBirthDay
     @using (Html.BeginForm("PatientMeasurement", "Home", FormMethod.Post))
     {
-        @Html.Hidden("PatientMeasurement", Model.Id)
+        @Html.HiddenFor(m=>m.Id)
         <input class="btn btn-info" type="submit" value="Просмотреть измерения пациента" />
     }
 </div>
