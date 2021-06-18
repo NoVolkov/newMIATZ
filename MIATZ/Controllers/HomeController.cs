@@ -10,7 +10,8 @@ namespace MIATZ.Controllers
 {
     public class HomeController : Controller
     {
-        private PatientRepository db = new PatientRepository();
+        private PatientRepository PatientDb = new PatientRepository();
+        private MeasurementRepository MeasurementDb = new MeasurementRepository();
         //вызов главной страницы
         public IActionResult Index()
         {
@@ -21,14 +22,20 @@ namespace MIATZ.Controllers
         public IActionResult Index(string snils)
         {
             Patient patient = new Patient();
-            patient = db.GetPatient(snils);
+            patient = PatientDb.GetPatient(snils);
             return View("Patient", patient);
         }
         public IActionResult Patient()
         {
             return View();
         }
-
+        [HttpPost]
+        public IActionResult PatientMeasurement(int Id)
+        {
+            List<Measurement> measurements = new List<Measurement>();
+            measurements = MeasurementDb.GetMeasurements(Id);
+            return View("ViewPatientMeasurements", measurements);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

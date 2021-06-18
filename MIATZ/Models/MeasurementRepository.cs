@@ -6,35 +6,32 @@ using System.Threading.Tasks;
 
 namespace MIATZ.Models
 {
-    public class PatientRepository
+    public class MeasurementRepository
     {
-
-        public Patient GetPatient(string snils)
+        public List<Measurement> GetMeasurements(int id)
         {
-            Patient patient = new Patient();
+            List<Measurement> mes = new List<Measurement>();
             //string str = System.Configuration.ConfigurationManager.ConnectionStrings["myDataBase"].ConnectionString;
             string str = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dim5d\source\repos\MIATZ\MIATZ\AppData\miazDB.mdf;Integrated Security=True;Connect Timeout=30";
             using (SqlConnection con = new SqlConnection(str))
             {
-                SqlCommand com = new SqlCommand("SELECT *FROM Patient WHERE SNILS= "+snils, con);
+                SqlCommand com = new SqlCommand("SELECT *FROM Measurement WHERE Patient_id= " + id, con);
                 con.Open();
                 SqlDataReader r = com.ExecuteReader();
                 while (r.Read())
                 {
-                    Patient p = new Patient();
+                    Measurement p = new Measurement();
                     p.Id = (int)r["ID"];
-                    p.Name = r["Name"].ToString();
-                    p.Surname = r["Surname"].ToString();
-                    p.Patronymic = r["Patronomic"].ToString();
-                    p.Snils = r["SNILS"].ToString();
-                    p.DateOfBirthDay = (DateTime)r["DateOfBirth"];
-                    p.Height = (double)r["Height"];
-                    p.Weight = (double)r["Weight"];
-                    patient = p;
+                    p.IdPatient = (int)r["Patient_id"];
+                    p.Date = (DateTime)r["Date"];
+                    p.Status = r["Status"].ToString();
+                    p.TopPressure = (int)r["TopPreassure"];
+                    p.BottomPressure = (int)r["BottomPreassure"];
+                    mes.Add(p);
                 }
 
             }
-            return patient;
+            return mes;
         }
     }
 }

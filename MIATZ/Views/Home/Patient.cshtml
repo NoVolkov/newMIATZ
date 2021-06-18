@@ -5,14 +5,21 @@
 
 <h2>Patient</h2>
 <div>
+    <!--имя, фамилия, отчество-->
     @Model.Name
     @Model.Surname
     @Model.Patronymic
 </div>
 <div>
+    <!--вес, рост, дата рождения-->
     @Model.Weight
     @Model.Height
     @Model.DateOfBirthDay
+    @using (Html.BeginForm("PatientMeasurement", "Home", FormMethod.Post))
+    {
+        @Html.Hidden("PatientMeasurement", Model.Id)
+        <input class="btn btn-info" type="submit" value="Просмотреть измерения пациента" />
+    }
 </div>
 @using (Html.BeginForm())
 {
