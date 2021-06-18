@@ -1,8 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Главная страница";
 }
-<h1>Поиск пациента</h1>
 <div>
-
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("snils")
+        <input class="btn btn-info" type="submit" value="Найти пациента" />
+    }
 </div>
 

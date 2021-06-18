@@ -13,7 +13,7 @@ namespace MIATZ.Models
         public string Name { get; set; } //имя
         public string Surname { get; set; } //фамилия
         public string Patronymic { get; set; } //отчество
-        public int Age { get; set; } // возраст
+        public DateTime DateOfBirthDay { get; set; } // возраст
         public int Height { get; set; }// рост
         public int Weight { get; set; }//вес
 

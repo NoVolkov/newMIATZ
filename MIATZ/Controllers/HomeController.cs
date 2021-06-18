@@ -14,6 +14,12 @@ namespace MIATZ.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Index(int snils)
+        {
+
+            return View();
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
