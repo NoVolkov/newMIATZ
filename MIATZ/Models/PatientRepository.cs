@@ -9,14 +9,14 @@ namespace MIATZ.Models
     public class PatientRepository
     {
 
-        public List<Patient> GetPatient(int snils)
+        public Patient GetPatient(string snils)
         {
-            List<Patient> patients = new List<Patient>();
+            Patient patient = new Patient();
             //string str = System.Configuration.ConfigurationManager.ConnectionStrings["myDataBase"].ConnectionString;
-            string str = "заглушка";
+            string str = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dim5d\source\repos\MIATZ\MIATZ\AppData\miazDB.mdf;Integrated Security=True;Connect Timeout=30";
             using (SqlConnection con = new SqlConnection(str))
             {
-                SqlCommand com = new SqlCommand("SELECT *FROM Patient WHERE ID = "+snils, con);
+                SqlCommand com = new SqlCommand("SELECT *FROM Patient WHERE SNILS= "+snils, con);
                 con.Open();
                 SqlDataReader r = com.ExecuteReader();
                 while (r.Read())
@@ -24,16 +24,16 @@ namespace MIATZ.Models
                     Patient p = new Patient();
                     p.Name = r["Name"].ToString();
                     p.Surname = r["Surname"].ToString();
-                    p.Patronymic = r["Patronymic"].ToString();
+                    p.Patronymic = r["Patronomic"].ToString();
                     p.Snils = r["SNILS"].ToString();
                     p.DateOfBirthDay = (DateTime)r["DateOfBirth"];
-                    p.Height = (int)r["Height"];
-                    p.Weight = (int)r["Weight"];
-                    patients.Add(p);
+                    p.Height = (double)r["Height"];
+                    p.Weight = (double)r["Weight"];
+                    patient = p;
                 }
 
             }
-            return patients;
+            return patient;
         }
     }
 }

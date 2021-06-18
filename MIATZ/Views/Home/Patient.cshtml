@@ -1,11 +1,24 @@
-﻿@model  IEnumerable<Patient>
+﻿@model Patient
 @{
     ViewData["Title"] = "Patient";
 }
 
 <h2>Patient</h2>
-@foreach(var p in Model)
+<div>
+    @Model.Name
+    @Model.Surname
+    @Model.Patronymic
+</div>
+<div>
+    @Model.Weight
+    @Model.Height
+    @Model.DateOfBirthDay
+</div>
+@using (Html.BeginForm())
 {
-   
+    <textarea cols="50" id="text" name="text" rows="5">
+    </textarea>
+    <input class="btn btn-info" type="submit" value="Отправить комментарий" />
 }
+
 

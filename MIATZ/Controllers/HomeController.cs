@@ -18,11 +18,11 @@ namespace MIATZ.Controllers
         }
         //метод по пост, открываем представление Patient, куда передаем пациентов
         [HttpPost]
-        public IActionResult Index(int snils)
+        public IActionResult Index(string snils)
         {
-            List<Patient> patients = new List<Patient>();
-            patients = db.GetPatient(snils);
-            return View("Patient", patients);
+            Patient patient = new Patient();
+            patient = db.GetPatient(snils);
+            return View("Patient", patient);
         }
         public IActionResult Patient()
         {
