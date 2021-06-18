@@ -9,7 +9,7 @@ namespace MIATZ.Models
     {
         //класс клиента
         public int Id { get; set; }
-        public int Snils { get; set; } //снилс
+        public string Snils { get; set; } //снилс
         public string Name { get; set; } //имя
         public string Surname { get; set; } //фамилия
         public string Patronymic { get; set; } //отчество

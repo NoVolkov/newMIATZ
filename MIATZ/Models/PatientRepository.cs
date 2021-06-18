@@ -16,7 +16,7 @@ namespace MIATZ.Models
             string str = "заглушка";
             using (SqlConnection con = new SqlConnection(str))
             {
-                SqlCommand com = new SqlCommand("SELECT *FROM Patient", con);
+                SqlCommand com = new SqlCommand("SELECT *FROM Patient WHERE ID = "+snils, con);
                 con.Open();
                 SqlDataReader r = com.ExecuteReader();
                 while (r.Read())
@@ -25,7 +25,7 @@ namespace MIATZ.Models
                     p.Name = r["Name"].ToString();
                     p.Surname = r["Surname"].ToString();
                     p.Patronymic = r["Patronymic"].ToString();
-                    p.Snils = (int)r["SNILS"];
+                    p.Snils = r["SNILS"].ToString();
                     p.DateOfBirthDay = (DateTime)r["DateOfBirth"];
                     p.Height = (int)r["Height"];
                     p.Weight = (int)r["Weight"];
@@ -33,8 +33,7 @@ namespace MIATZ.Models
                 }
 
             }
-            ViewBag.item = guests;
-            return View();
+            return patients;
         }
     }
 }
