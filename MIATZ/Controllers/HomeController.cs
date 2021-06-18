@@ -10,6 +10,7 @@ namespace MIATZ.Controllers
 {
     public class HomeController : Controller
     {
+        private PatientRepository db = new PatientRepository();
         public IActionResult Index()
         {
             return View();
