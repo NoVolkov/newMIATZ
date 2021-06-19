@@ -3,29 +3,22 @@
     ViewData["Title"] = "Patient";
 }
 
-<h2>Patient</h2>
-<div>
+
+<div class="head-content">
+    <div class="patient-title">@Model.Name </div>
+    <div class="patient-title">@Model.Surname</div>
+    <div class="patient-title">@Model.Patronymic</div>
     <!--имя, фамилия, отчество-->
-    @Model.Name
-    @Model.Surname
-    @Model.Patronymic
-</div>
-<div>
+
     <!--вес, рост, дата рождения-->
-    @Model.Weight
-    @Model.Height
-    @Model.DateOfBirthDay
-    @using (Html.BeginForm("PatientMeasurement", "Home", FormMethod.Post))
-    {
-        @Html.HiddenFor(m=>m.Id)
-        <input class="btn btn-info" type="submit" value="Просмотреть измерения пациента" />
-    }
+    <div class="patient-title"> Вес: @Model.Weight</div>
+    <div class="patient-title"> Рост: @Model.Height</div>
+    <div class="patient-title"> Дата рождения: @Model.DateOfBirthDay</div>
+
 </div>
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("PatientMeasurement", "Home", FormMethod.Post))
 {
-    <textarea cols="50" id="text" name="text" rows="5">
-    </textarea>
-    <input class="btn btn-info" type="submit" value="Отправить комментарий" />
+    @Html.HiddenFor(m => m.Id)
+    <input class="button-two" type="submit" value="Просмотреть измерения пациента" />
 }
-
-

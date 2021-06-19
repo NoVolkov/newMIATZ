@@ -1,11 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Главная страница";
 }
-<div>
+<div class="content">
     @using (Html.BeginForm())
     {
-        @Html.TextBox("snils")
-        <input class="btn btn-info" type="submit" value="Найти пациента" />
+        @Html.TextBox("snils", null, new { @class = "head-input" })
+        <input class="button-search" type="submit" value="Найти" />
     }
 </div>
 

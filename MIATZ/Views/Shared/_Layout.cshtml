@@ -7,6 +7,9 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/Style.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -16,18 +19,19 @@
     </environment>
 </head>
 <body>
-    <div>
-        <h1 class="">HEALTH</h1>
-        <div>Страница врача</div>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #0091AD;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+                @Html.ActionLink("HEALTHAN",
+               "Index", "Home", new { area = "" }, new { @class = "navbar-brand head-title" })
+            </div>
+        </div>
     </div>
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2021 - MIATZ</p>
-        </footer>
     </div>
 
     <environment include="Development">
