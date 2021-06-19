@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace MIATZ.Models
         {
             Patient patient = new Patient();
             //string str = System.Configuration.ConfigurationManager.ConnectionStrings["myDataBase"].ConnectionString;
+            //поменять имя пользователя, в дальнейшем перенесется в конфиг файла
             string str = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dim5d\source\repos\MIATZ\MIATZ\AppData\miazDB.mdf;Integrated Security=True;Connect Timeout=30";
+            
             using (SqlConnection con = new SqlConnection(str))
             {
                 SqlCommand com = new SqlCommand("SELECT *FROM Patient WHERE SNILS= "+snils, con);

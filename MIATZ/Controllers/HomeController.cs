@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MIATZ.Models;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace MIATZ.Controllers
 {
@@ -36,7 +38,28 @@ namespace MIATZ.Controllers
             measurements = MeasurementDb.GetMeasurements(Id);
             return View("ViewPatientMeasurements", measurements);
         }
-
+        [HttpPost]
+        public IActionResult SetDescription(int Id, string description)
+        {
+            string str = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dim5d\source\repos\MIATZ\MIATZ\AppData\miazDB.mdf;Integrated Security=True;Connect Timeout=30";
+            using (SqlConnection con = new SqlConnection(str))
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO Description (Patient_id, Date, Comment) VALUES(@patId, @Date, @Comment)", con);
+                cmd.Parameters.Add("@patId", SqlDbType.NVarChar).Value = Id;
+                cmd.Parameters.Add("@Date", SqlDbType.DateTime).Value = DateTime.Now;
+                cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = description;
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    View("Ошибка");
+                }
+            }
+            return View("ViewPatientMeasurements");
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

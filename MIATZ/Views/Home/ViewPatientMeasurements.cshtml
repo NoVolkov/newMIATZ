@@ -39,6 +39,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BottomPressure)
             </td>
+            <td>
+                @using (Html.BeginForm())
+                {
+                    @Html.HiddenFor(m => item.Id)
+                    <textarea cols="20" id="text" name="text" rows="2"></textarea>
+                    <input class="button-two" type="submit" value="Оставить рекомандацию" />
+                }
+            </td>
         </tr>
 }
     </tbody>
