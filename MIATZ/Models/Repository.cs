@@ -7,6 +7,6 @@ namespace MIATZ.Models
 {
     public static class Repository
     {
-        public static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dim5d\source\repos\MIATZ\MIATZ\AppData\miazDB.mdf;Integrated Security=True;Connect Timeout=30";
+        public static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\User\source\repos\newMIATZ\MIATZ\AppData\miazDB.mdf;Integrated Security=True;Connect Timeout=30";
     }
 }
