@@ -1,7 +1,17 @@
 ﻿@model IEnumerable<MIATZ.Models.Measurement>
 @{
     ViewData["Title"] = "ViewPatientMeasurements";
-
+    int[] topPressure = new int[Model.Count()];
+    int[] bottomPressure = new int[Model.Count()];
+    string[] date = new string[Model.Count()];
+    int[] pulse = new int[Model.Count()];
+    for (int i=0; i<Model.Count(); i++)
+    {
+        topPressure[i] = Model.ElementAt(i).TopPressure;
+        bottomPressure[i] = Model.ElementAt(i).BottomPressure;
+        date[i] = Convert.ToString(Model.ElementAt(i).Date);
+        pulse[i] = Model.ElementAt(i).Pulse;
+    }
 }
 
 <h2>ViewPatientMeasurements</h2>
@@ -9,10 +19,38 @@
     <div class="col-sm-6">
         <div class="card">
             <div class="card-header">
-                Bar Chart
+                Верхнее артериальное давление
             </div>
             <div class="card-body">
                 <canvas class="my-4 h-25" id="bar"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                Нижнее артериальное давление
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="bar2"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                Пульс
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="pulse"></canvas>
             </div>
         </div>
     </div>
@@ -33,46 +71,54 @@
             <th>
                 @Html.DisplayNameFor(model => model.BottomPressure)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pulse)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TopPressure)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BottomPressure)
-                </td>
-                <td>
-                    @using (Html.BeginForm())
-                    {
-                        @Html.HiddenFor(m => item.Id)
-                        <textarea cols="20" id="text" name="text" rows="2"></textarea>
-                        <input class="button-three" style="padding:5px;" type="submit" value="Оставить рекомандацию" />
-                    }
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopPressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BottomPressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pulse)
+            </td>
+            <td>
+                @using (Html.BeginForm())
+                {
+                    @Html.HiddenFor(m => item.Id)
+                    <textarea cols="20" id="text" name="text" rows="2"></textarea>
+                    <input class="button-three" style="padding:5px;" type="submit" value="Оставить рекомандацию" />
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>
 <script type="text/javascript">
     var chart = document.getElementById('bar').getContext('2d');    
+    var topPreassure = @Json.Serialize(topPressure);
+    var date = @Json.Serialize(date);
     var mychart = new Chart(chart, {
         type: 'bar',
         data: {
-            labels: ['001', '002', '003'],
+            labels: date,
             datasets: [{
-                label: 'Bar Chart',
-                data: [100, 200, 300],
+                label: 'Верхнее артериальное давление',
+                data: topPreassure,
                 backgroudcolor:'rgba(6, 128, 250)'
             }]
         },
@@ -81,6 +127,52 @@
                 yAxes: [{
                     ticks: {
                         beginAtZero:true
+                    }
+                }]
+            }
+        }
+    })
+    var chart2 = document.getElementById('bar2').getContext('2d'); 
+    var bottomPreassure = @Json.Serialize(bottomPressure);
+
+    var mychart2 = new Chart(chart2, {
+        type: 'bar',
+        data: {
+            labels: date,
+            datasets: [{
+                label: 'Нижнее артериальное давление',
+                data: bottomPreassure,
+                backgroudcolor: 'rgba(6, 128, 250)'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+    var chart3 = document.getElementById('pulse').getContext('2d'); 
+    var pulse = @Json.Serialize(pulse);
+
+    var mychart3 = new Chart(chart3, {
+        type: 'bar',
+        data: {
+            labels: date,
+            datasets: [{
+                label: 'Пульс',
+                data: pulse,
+                backgroudcolor: 'rgba(6, 128, 250)'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
                     }
                 }]
             }
