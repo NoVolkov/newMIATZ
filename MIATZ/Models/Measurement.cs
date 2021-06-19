@@ -19,5 +19,8 @@ namespace MIATZ.Models
         public int TopPressure { get; set; } //верхнее давление
         [DisplayName("Нижнее артериальное давление")]
         public int BottomPressure { get; set; }//нижнее давление
+        [DisplayName("Пульс")]
+
+        public int Pulse { get; set; }
     }
 }

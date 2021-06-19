@@ -27,6 +27,7 @@ namespace MIATZ.Models
                     p.Status = r["Status"].ToString();
                     p.TopPressure = (int)r["TopPreassure"];
                     p.BottomPressure = (int)r["BottomPreassure"];
+                    p.Pulse = (int)r["Pulse"];
                     mes.Add(p);
                 }
 

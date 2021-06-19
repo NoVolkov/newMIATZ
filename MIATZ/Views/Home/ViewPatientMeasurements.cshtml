@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<MIATZ.Models.Measurement>
-
 @{
     ViewData["Title"] = "ViewPatientMeasurements";
 }
@@ -25,29 +24,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TopPressure)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BottomPressure)
-            </td>
-            <td>
-                @using (Html.BeginForm())
-                {
-                    @Html.HiddenFor(m => item.Id)
-                    <textarea cols="20" id="text" name="text" rows="2"></textarea>
-                    <input class="button-three" style="padding:5px;" type="submit" value="Оставить рекомандацию" />
-                }
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TopPressure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BottomPressure)
+                </td>
+                <td>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.HiddenFor(m => item.Id)
+                        <textarea cols="20" id="text" name="text" rows="2"></textarea>
+                        <input class="button-three" style="padding:5px;" type="submit" value="Оставить рекомандацию" />
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

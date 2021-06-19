@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -16,6 +17,7 @@ namespace MIATZ.Models
             //string str = System.Configuration.ConfigurationManager.ConnectionStrings["myDataBase"].ConnectionString;
             //поменять имя пользователя, в дальнейшем перенесется в конфиг файла
             string str = Repository.connectionString;
+
 
             using (SqlConnection con = new SqlConnection(str))
             {
