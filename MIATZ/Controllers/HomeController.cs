@@ -41,7 +41,7 @@ namespace MIATZ.Controllers
         [HttpPost]
         public IActionResult SetDescription(int Id, string description)
         {
-            string str = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dim5d\source\repos\MIATZ\MIATZ\AppData\miazDB.mdf;Integrated Security=True;Connect Timeout=30";
+            string str = Repository.connectionString;
             using (SqlConnection con = new SqlConnection(str))
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO Description (Patient_id, Date, Comment) VALUES(@patId, @Date, @Comment)", con);

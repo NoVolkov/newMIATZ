@@ -12,7 +12,7 @@ namespace MIATZ.Models
         {
             List<Measurement> mes = new List<Measurement>();
             //string str = System.Configuration.ConfigurationManager.ConnectionStrings["myDataBase"].ConnectionString;
-            string str = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dim5d\source\repos\MIATZ\MIATZ\AppData\miazDB.mdf;Integrated Security=True;Connect Timeout=30";
+            string str = Repository.connectionString;
             using (SqlConnection con = new SqlConnection(str))
             {
                 SqlCommand com = new SqlCommand("SELECT *FROM Measurement WHERE Patient_id= " + id, con);
