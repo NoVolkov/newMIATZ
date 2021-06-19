@@ -1,10 +1,23 @@
 ﻿@model IEnumerable<MIATZ.Models.Measurement>
 @{
     ViewData["Title"] = "ViewPatientMeasurements";
+
 }
 
 <h2>ViewPatientMeasurements</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                Bar Chart
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="bar"></canvas>
+            </div>
+        </div>
+    </div>
 
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -51,3 +64,26 @@
         }
     </tbody>
 </table>
+<script type="text/javascript">
+    var chart = document.getElementById('bar').getContext('2d');    
+    var mychart = new Chart(chart, {
+        type: 'bar',
+        data: {
+            labels: ['001', '002', '003'],
+            datasets: [{
+                label: 'Bar Chart',
+                data: [100, 200, 300],
+                backgroudcolor:'rgba(6, 128, 250)'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    })
+</script>
