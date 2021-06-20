@@ -7,13 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 using MIATZ.Models;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace MIATZ.Controllers
 {
     public class HomeController : Controller
     {
-        private PatientRepository PatientDb = new PatientRepository();
-        private MeasurementRepository MeasurementDb = new MeasurementRepository();
+
+        private readonly IConfiguration _config;
+        private PatientRepository PatientDb;
+        private MeasurementRepository MeasurementDb;
+        public HomeController(IConfiguration config)
+        {
+            PatientDb = new PatientRepository(config);
+            MeasurementDb = new MeasurementRepository(config);
+            _config = config;
+        }
         //вызов главной страницы
         public IActionResult Index()
         {
@@ -41,7 +50,8 @@ namespace MIATZ.Controllers
         [HttpPost]
         public IActionResult SetDescription(int Id, string description)
         {
-            string str = Repository.connectionString;
+            //string str = Repository.connectionString;
+            string str = _config.GetConnectionString("DefaultConnection");
             using (SqlConnection con = new SqlConnection(str))
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO Description (Patient_id, Date, Comment) VALUES(@patId, @Date, @Comment)", con);

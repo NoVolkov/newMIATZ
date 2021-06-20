@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -8,11 +9,17 @@ namespace MIATZ.Models
 {
     public class MeasurementRepository
     {
+        private readonly IConfiguration _config;
+        public MeasurementRepository(IConfiguration config)
+        {
+            _config = config;
+        }
         public List<Measurement> GetMeasurements(int id)
         {
             List<Measurement> mes = new List<Measurement>();
             //string str = System.Configuration.ConfigurationManager.ConnectionStrings["myDataBase"].ConnectionString;
-            string str = Repository.connectionString;
+            //string str = Repository.connectionString;
+            string str = _config.GetConnectionString("DefaultConnection");
             using (SqlConnection con = new SqlConnection(str))
             {
                 SqlCommand com = new SqlCommand("SELECT *FROM Measurement WHERE Patient_id= " + id, con);
